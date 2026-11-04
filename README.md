@@ -10,7 +10,7 @@
 * **Đối tượng:** Sinh viên năm nhất ngành **Công nghệ Thông tin (PTIT)**.
 * **Lĩnh vực:** Các học phần kỹ thuật, Hệ điều hành, Mạng máy tính và Lập trình.
 * **Tình huống cụ thể:**  
-  > *[Điền tình huống cụ thể, đoạn mã nguồn bị lỗi, hoặc bài toán hệ thống bạn đang cần giải quyết tại đây]*
+  > *[[Điền tình huống cụ thể](https://www.facebook.com/search/top/?q=nh%E1%BA%ADn%20chuy%E1%BB%83n%20tti%E1%BB%81nhaif%20h%C6%B0%E1%BB%9Bc)]*
 
 ---
 
