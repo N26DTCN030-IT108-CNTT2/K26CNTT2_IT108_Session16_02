@@ -1,41 +1,30 @@
-# K26CNTT2_IT108_Session16_02
-# 📋 Template Prompt Chuẩn – Học Tập & Kỹ Thuật
+# BÀI 2: SỰ CỐ PHIÊN LÀM VIỆC TRÊN HỆ THỐNG VẬN TẢI
 
-> **Ghi chú:** Đây là khung mẫu cấu trúc Prompt chuẩn dành cho các môn học kỹ thuật, lập trình và hệ điều hành.
-
----
-
-## 📌 1. Bối cảnh (Context)
-
-* **Đối tượng:** Sinh viên năm nhất ngành **Công nghệ Thông tin (PTIT)**.
-* **Lĩnh vực:** Các học phần kỹ thuật, Hệ điều hành, Mạng máy tính và Lập trình.
-* **Tình huống cụ thể:**  
-  > *[[Điền tình huống cụ thể](https://www.facebook.com/search/top/?q=nh%E1%BA%ADn%20chuy%E1%BB%83n%20tti%E1%BB%81nhaif%20h%C6%B0%E1%BB%9Bc)]*
+**Lớp:** K26CNTT2
+**Môn học:** Nhập Môn Công Nghệ Thông Tin (IT108)  
+**Mã sinh viên:** N26DTCN030  
+**Họ và tên:** Lê Hồ Thanh Thảo  
 
 ---
 
-## 🎯 2. Nhiệm vụ (Task)
+## 📌 PHẦN 1: PHÂN TÍCH
 
-Thực hiện các yêu cầu chính sau:
+**So sánh sự đánh đổi giữa dung lượng Cache và Cookies trong lưu trữ dữ liệu người dùng:**
 
-1. **Phân tích nguyên nhân:** Chỉ ra chính xác gốc rễ vấn đề / logic lỗi.
-2. **Đưa ra giải pháp:** Hướng dẫn từng bước khắc phục hoặc viết lại đoạn mã chuẩn.
-3. **Giải thích chuyên sâu:** Làm rõ cơ chế hoạt động bên dưới của hệ thống.
+| Tiêu chí | Cache (Bộ nhớ đệm) | Cookies |
+| :--- | :--- | :--- |
+| **Dung lượng** | Rất lớn (Có thể lên tới vài chục MB đến vài GB). | Rất nhỏ (Tối đa khoảng ~4KB mỗi cookie). |
+| **Mục đích chính** | Lưu trữ tài nguyên tĩnh (hình ảnh, CSS, JS, HTML) giúp tăng tốc độ tải trang ở những lần truy cập sau. | Lưu trữ trạng thái phiên làm việc (session), định danh người dùng và các tùy chọn cá nhân hóa. |
+| **Đánh đổi & Ứng dụng** | Tốn dung lượng ổ cứng nhưng giảm tải băng thông mạng. **Không phù hợp** để lưu token đăng nhập do không có cơ chế bảo mật truyền tải tự động theo request. | Bị giới hạn dung lượng nghiêm ngặt và luôn đính kèm vào mỗi HTTP Request (làm tăng nhẹ dung lượng gói tin). **Cực kỳ phù hợp** để lưu trữ Token định danh vì trình duyệt tự động quản lý. |
 
----
-
-## ⚙️ 3. Yêu cầu & Ràng buộc (Constraints)
-
-| Tiêu chí | Quy định chi tiết |
-| :--- | :--- |
-| **Định dạng** | Trình bày chuẩn Markdown (sử dụng Headings, Bullet Points, Table, Code Blocks). |
-| **Độ sâu kiến thức** | Giải thích chi tiết bản chất kỹ thuật thay vì chỉ đưa ra đáp án ngắn gọn. |
-| **Độ dài mở đầu** | Phần tổng quan / mở đầu súc tích, không vượt quá **300 từ**. |
-| **Ngôn ngữ** | Tiếng Việt kĩ thuật, chính xác, mạch lạc. |
+**Kết luận:** Để duy trì trạng thái giỏ hàng và phiên đăng nhập cho shipper, **Cookies** là lựa chọn tối ưu và duy nhất phù hợp.
 
 ---
 
-## 🚫 4. Phạm vi loại trừ (Exclusions)
+## ⚙️ PHẦN 2: TRIỂN KHAI
 
-* **Không lan man:** Không đề cập tới các kiến thức ngoài lề hoặc lý thuyết không liên quan trực tiếp đến vấn đề.
-* **Không bịa đặt (Hallucination):** Tuyệt đối không tự tạo ra các cú pháp lệnh, hàm, hoặc thư viện không tồn tại trong thực tế.
+Để giải quyết vấn đề phiên làm việc bị mất khi tải lại trang và đảm bảo tính bảo mật, cấu trúc mẩu tin Cookie (Persistent Cookie) cần được thiết lập như sau:
+
+```http
+Set-Cookie: session_token=[Mã_Token_Định_Danh]; Max-Age=604800; HttpOnly; Secure; SameSite=Strict
+```
